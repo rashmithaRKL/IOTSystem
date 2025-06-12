@@ -15,12 +15,14 @@ interface SensorData {
 const DashboardPage = () => {
   const [sensorData, setSensorData] = useState<SensorData | null>(null);
   const [error, setError] = useState<string>('');
+  const [lastUpdatedClient, setLastUpdatedClient] = useState<string>('');
 
   const loadSensorData = async () => {
     try {
       const data = await fetchSensorData();
       setSensorData(data);
       setError('');
+      setLastUpdatedClient(new Date().toLocaleTimeString());
     } catch (err: any) {
       setError(err.message);
     }
@@ -94,7 +96,12 @@ const DashboardPage = () => {
 
       {sensorData && sensorData.lastUpdated && (
         <p className="text-sm text-gray-500 mt-4">
-          Last Updated: {new Date(sensorData.lastUpdated).toLocaleTimeString()}
+          Server Last Updated: {new Date(sensorData.lastUpdated).toLocaleTimeString()}
+        </p>
+      )}
+      {lastUpdatedClient && (
+        <p className="text-sm text-gray-500">
+          Client Last Updated: {lastUpdatedClient}
         </p>
       )}
 
