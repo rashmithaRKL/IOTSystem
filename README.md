@@ -58,7 +58,7 @@ The system provides real-time data visualization and manual control via a respon
 2. Install dependencies:
 
 ```bash
-npm install
+npm install --force
 ```
 
 3. Run the development server:
